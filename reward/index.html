@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reward Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding-top: 20px;
+      background-color: #f8f9fa;
+    }
+    .card {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+    }
+    .card img {
+      object-fit: cover;
+      height: 200px;
+    }
+    .card-title {
+      font-size: 1.25rem;
+    }
+    #skipButton {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container text-center">
+    <h1 class="mb-5 text-success">Reward Page</h1>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="col">
+        <div class="card">
+          <img src="https://cdn.pixabay.com/photo/2021/02/08/13/50/trophy-5994842_640.png" class="card-img-top" alt="Reward Image 1">
+          <div class="card-body">
+            <h5 class="card-title">Reward 1</h5>
+            <p class="card-text">Watch this video to learn more about Reward 1.</p>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#videoModal">
+              Watch Video
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img src="https://cdn.pixabay.com/photo/2021/02/08/13/50/trophy-5994842_640.png" class="card-img-top" alt="Reward Image 2">
+          <div class="card-body">
+            <h5 class="card-title">Reward 2</h5>
+            <p class="card-text">Watch this video to learn more about Reward 2.</p>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#videoModal">
+              Watch Video
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card">
+          <img src="https://cdn.pixabay.com/photo/2021/02/08/13/50/trophy-5994842_640.png" class="card-img-top" alt="Reward Image 3">
+          <div class="card-body">
+            <h5 class="card-title">Reward 3</h5>
+            <p class="card-text">Watch this video to learn more about Reward 3.</p>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#videoModal">
+              Watch Video
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="videoModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="videoModalLabel">Watch the Video</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <video id="modalVideo" width="100%" controls>
+            <source src="./techAdd.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-warning" id="skipButton">Skip Video</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    const videoModal = document.getElementById('videoModal');
+    const modalVideo = document.getElementById('modalVideo');
+    const skipButton = document.getElementById('skipButton');
+    let skipButtonTimeout;
+
+    videoModal.addEventListener('hidden.bs.modal', function () {
+      modalVideo.pause();
+      skipButton.style.display = 'none';
+      clearTimeout(skipButtonTimeout);
+    });
+
+    videoModal.addEventListener('shown.bs.modal', function () {
+      modalVideo.play();
+      
+      skipButtonTimeout = setTimeout(function () {
+        skipButton.style.display = 'inline-block';
+      
+      }, 5000);
+    });
+
+    modalVideo.addEventListener('ended', function () {
+        window.location.href='https://www.google.com/?q=article' 
+    });
+
+    skipButton.addEventListener('click', function () {
+      modalVideo.pause(); 
+      const modal = bootstrap.Modal.getInstance(videoModal); 
+      modal.hide(); 
+      window.location.href='https://www.google.com/?q=article' 
+    });
+  </script>
+
+</body>
+</html>
